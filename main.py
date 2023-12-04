@@ -23,9 +23,11 @@ def main():
     if uploaded_file:
         # Read uploaded file
         data = pd.read_csv(uploaded_file)
-
+        st.subheader("Set Filter")
         # Use the wide layout for the main content
         col1, col2 = st.columns(2)
+
+
 
         # Column 1 in the wide layout
         with col1:
