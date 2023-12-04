@@ -1,6 +1,5 @@
 import streamlit as st
 
-
 def adjust_weight():
 
     # Initial dictionary
@@ -20,8 +19,8 @@ def adjust_weight():
 
         # Input fields for each key in the dictionary
         for key, value in weight.items():
-            st.write(f"Default value: {key} = {weight[key]}")
             weight[key] = float(st.text_input(f'Weight for {key}', value=value, key=key, type='default'))
+            st.write(f"Value: {key} = {weight[key]}")
 
         # Submit button to update the weights
         submitted = st.form_submit_button('Update Weights')

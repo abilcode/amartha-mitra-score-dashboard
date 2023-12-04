@@ -29,12 +29,12 @@ def main():
 
         # Column 1 in the wide layout
         with col1:
-            st.subheader("Weight adjustments:")
+            st.subheader("Weight adjustments")
             weight = adjust_weight()
 
         # Column 2 in the wide layout
         with col2:
-            st.subheader("Threshold adjustments:")
+            st.subheader("Threshold adjustments")
             threshold = adjust_threshold(data = data)
 
         button_to_calculate = st.button("Calculate")

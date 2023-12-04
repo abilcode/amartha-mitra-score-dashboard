@@ -28,6 +28,7 @@ def adjust_threshold(data=None):
             'total_saving_frequency': 0.8,
 
         }
+
         threshold_quantile = {
             'max_dpd': data['max_dpd'].quantile(threshold['max_dpd']),
             'total_presence': data['total_presence'].astype('float').quantile(threshold['total_presence']),
@@ -41,15 +42,27 @@ def adjust_threshold(data=None):
     # Create a form using st.form
     with st.form(key='threshold_form'):
         st.write('Threshold Configuration')
-        if option:
+        if option == "Quantile":
+            threshold_quantile = {
+                'max_dpd': data['max_dpd'].quantile(threshold['max_dpd']),
+                'total_presence': data['total_presence'].astype('float').quantile(threshold['total_presence']),
+                'excess_repayment': data['excess_repayment'].quantile(threshold['excess_repayment']),
+                'sum_tr': data['sum_tr'].quantile(threshold['sum_tr']),
+                'total_amount_ppob': data['total_amount_ppob'].quantile(threshold['total_amount_ppob']),
+                'max_amount_saving': data['max_amount_saving'].quantile(threshold['max_amount_saving']),
+                'total_saving_frequency': data['total_saving_frequency'].quantile(threshold['total_saving_frequency'])
+            }
 
+        if option:
             # Input fields for each key in the dictionary
             for key, value in threshold.items():
-                st.write(f"Default value: {key} = {threshold[key]}")
                 threshold[key] = float(st.text_input(f'Threshold for {key}', value=value, key=f"{key}_t", type='default'))
+                if option != "Quantile":
+                    st.write(f"Value: {key} = {threshold[key]}")
                 try:
                     if option == "Quantile":
                         threshold_quantile[key] = threshold[key]
+                        st.write(f"Value: {key} = {threshold_quantile[key]}")
                 except UnboundLocalError:
                     pass
 
